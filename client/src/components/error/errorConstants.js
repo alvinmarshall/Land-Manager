@@ -1,0 +1,1 @@
+export const ON_ERROR_RECEIVE = "ON_ERROR_RECEIVE";
