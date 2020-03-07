@@ -2,4 +2,4 @@ export const CREATE_LAND = "CREATE_LAND";
 export const GET_ALL_LANDS = "GET_ALL_LANDS";
 export const CREATE_LAND_TYPE = "CREATE_LAND_TYPE";
 export const CREATE_LAND_DESCRIPTION = "CREATE_LAND_DESCRIPTION";
-export const LAND_TYPE_MODAL = "LAND_TYPE_MODAL";
+export const LAND_TYPE_MODAL = "LandTypeModal";

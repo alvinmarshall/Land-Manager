@@ -1,21 +1,20 @@
 import React, { useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { LAND_TYPE_MODAL } from "./reducer/landConstants";
-import { useDispatch } from "react-redux"
-import { modalOpenAction } from "../../modal/reducer/modalAction";
 
 const CreateLandForm = ({
   onCreateLand,
   landTypeOptions,
   landStatusOptions,
-  landDescriptionOptions
+  landDescriptionOptions,
+  openModal
 }) => {
   const inputFocus = useRef(null);
-  const dispatch = useDispatch()
-  const { handleSubmit, register, errors } = useForm();
+  const { handleSubmit, register, reset, errors } = useForm();
 
-  const handleOnSubmitForm = payload => {
+  const handleOnSubmitForm = (payload, e) => {
     onCreateLand(payload);
+    e.target.reset();
   };
 
   useEffect(() => {
@@ -129,7 +128,9 @@ const CreateLandForm = ({
               </div>
               <div className="col-sm-2">
                 <button
+                  type="button"
                   className="btn btn-sm btn-primary mt-2"
+                  onClick={() => openModal(LAND_TYPE_MODAL)}
                 >
                   Add <i className="ni ni-fat-add"></i>
                 </button>
@@ -147,7 +148,7 @@ const CreateLandForm = ({
                   ))}
                 </select>
               </div>
-              <div className="col-sm-2" onClick={() => dispatch(modalOpenAction(LAND_TYPE_MODAL))}>
+              <div className="col-sm-2">
                 <button className="btn btn-sm btn-primary mt-2">
                   Add <i className="ni ni-fat-add"></i>
                 </button>
