@@ -4,6 +4,7 @@ import { IUser } from "../../model/Users";
 import authService from "./auth.service";
 import passport from "passport";
 import Bcrypt from "bcryptjs";
+import errorService from "../errors/errors.service";
 
 class AuthController implements IBaseController {
   path = "/users";
@@ -58,11 +59,7 @@ class AuthController implements IBaseController {
       // check taken username
       const username = await authService.getOne({ username: user.username });
       if (username)
-        return res.status(400).send({
-          status: 400,
-          message: "Username already exist...",
-          error: ["username already in use"]
-        });
+        return res.status(400).send(errorService.dataExistError("username"));
 
       // hash user password
       const salt = await Bcrypt.genSalt(10);
@@ -81,11 +78,7 @@ class AuthController implements IBaseController {
           .split(",");
         return res.status(400).send({ status: 400, message });
       }
-      return res.status(500).send({
-        status: 500,
-        message: "Something went wrong, try again",
-        error: ["Internal error"]
-      });
+      return res.status(500).send(errorService.internalError());
     }
   }
   //#endregion
@@ -109,11 +102,7 @@ class AuthController implements IBaseController {
         error: []
       });
     } catch (error) {
-      return res.status(500).send({
-        status: 500,
-        message: "Something went wrong, try again",
-        error: ["Internal error"]
-      });
+      return res.status(500).send(errorService.internalError())
     }
   }
 }

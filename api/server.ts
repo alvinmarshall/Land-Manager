@@ -6,10 +6,11 @@ import Cors from "cors";
 import BodyParser from "body-parser";
 import Morgan from "morgan";
 import { passportService } from "./src/controllers/auth/passport.service";
+import LandController from "./src/controllers/land/land.controller";
 
 const app = new App({
   port: process.env.PORT,
-  controllers: [new AuthController()],
+  controllers: [new AuthController(), new LandController()],
   middlewares: [
     BodyParser.urlencoded({ extended: false }),
     BodyParser.json(),
@@ -20,4 +21,3 @@ const app = new App({
 });
 
 app.listen();
-
