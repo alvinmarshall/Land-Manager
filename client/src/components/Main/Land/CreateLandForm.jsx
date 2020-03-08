@@ -10,7 +10,7 @@ const CreateLandForm = ({
   openModal
 }) => {
   const inputFocus = useRef(null);
-  const { handleSubmit, register, reset, errors } = useForm();
+  const { handleSubmit, register, errors } = useForm();
 
   const handleOnSubmitForm = (payload, e) => {
     onCreateLand(payload);

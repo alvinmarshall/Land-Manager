@@ -13,7 +13,7 @@ const CreateLandView = () => {
 
   //Create land Action
   const createLandDispatch = payload => {
-    dispatch(createLandAction(payload))
+    dispatch(createLandAction(payload));
   };
 
   //Memorize create land Action
@@ -21,7 +21,7 @@ const CreateLandView = () => {
 
   //Open Modal with props
   const handleModalDispatch = (modal, props) => {
-    dispatch(modalOpenAction(modal, props))
+    dispatch(modalOpenAction(modal, props));
   };
 
   //Memorize Open modal
@@ -31,9 +31,9 @@ const CreateLandView = () => {
     <div>
       <CreateLandForm
         onCreateLand={handleLandCreate}
-        landTypeOptions={landType}
-        landStatusOptions={landStatus}
-        landDescriptionOptions={landDescription}
+        landTypeOptions={landType || []}
+        landStatusOptions={landStatus || []}
+        landDescriptionOptions={landDescription || []}
         openModal={handleOpenModal}
       />
     </div>

@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LandCard from "./LandCard";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { loadLandsAction } from "./reducer/landAction";
 
 const Land = () => {
+  const dispatch = useDispatch();
   const lands = useSelector(state => state.land.lands);
+
+  useEffect(() => {
+    dispatch(loadLandsAction());
+  }, [dispatch]);
 
   return (
     <div className="container-fluid">
@@ -15,4 +21,4 @@ const Land = () => {
   );
 };
 
-export default Land;
+export default React.memo(Land);

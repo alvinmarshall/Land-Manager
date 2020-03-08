@@ -24,7 +24,7 @@ const LandCard = ({ data }) => {
         <div className="card-body">
           <ul className="list-group list-group-flush">
             <li className="list-group-item">Location: {data.location}</li>
-            <li className="list-group-item">Type: </li>
+            <li className="list-group-item">Type: {data.type}</li>
             <li className="list-group-item">Town: {data.town}</li>
           </ul>
 

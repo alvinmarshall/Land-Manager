@@ -6,8 +6,9 @@ import { createLandTypeAction } from "./reducer/landAction";
 const LandTypeForm = ({ toggle }) => {
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
-  const handleFormSubmit = payload => {
+  const handleFormSubmit = (payload, evt) => {
     dispatch(createLandTypeAction(payload));
+    evt.target.reset();
   };
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>

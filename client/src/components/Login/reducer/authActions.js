@@ -1,35 +1,43 @@
+import { toastr } from "react-redux-toastr";
 import {
   GET_AUTHENTICATED_USER,
-  IS_LOADING,
   USER_LOGOUT,
   CHECK_TOKEN_AVAIL
 } from "./authConstants";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import { setErrorStateAction } from "../../error/errorAction";
+import { setTokenHeader } from "../../../config";
+import { setErrorAction } from "../../error/errorAction";
+import {
+  asyncActionStart,
+  asyncActionFinish,
+  asyncActionError
+} from "../../async/asyncAction";
 
 const HTTP_OK = 200;
 
-
 // Authenticate user from remote service
-export const loginAction = payload => dispatch => {
-  dispatch({ type: IS_LOADING, payload: true });
-  axios
-    .post("/users/login", payload)
-    .then(resp => {
-      const { status, data } = resp.data;
+export const loginAction = payload => {
+  return async dispatch => {
+    try {
+      dispatch(asyncActionStart());
+      const response = await axios.post("/users/login", payload);
+      const { status, data } = response.data;
       if (status === HTTP_OK) {
         const { token } = data;
+        setTokenHeader(token);
         localStorage.setItem("token", JSON.stringify(token));
+        toastr.success("Success!", `welcome back ${payload.username} `);
         const decode = jwt_decode(token, {});
-        dispatch({ type: IS_LOADING });
         dispatch(setAuthUserStateAction(decode));
+        dispatch(asyncActionFinish());
       }
-    })
-    .catch(err => {
-      dispatch({ type: IS_LOADING });
-      dispatch(setErrorStateAction(err));
-    });
+    } catch (err) {
+      console.log(err);
+      dispatch(asyncActionError());
+      dispatch(setErrorAction(err));
+    }
+  };
 };
 
 export const logoutAction = () => dispatch => {

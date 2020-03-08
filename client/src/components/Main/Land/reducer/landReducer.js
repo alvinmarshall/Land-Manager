@@ -1,14 +1,13 @@
 import createReducer from "../../../../app/reducer/reducerUtil";
 import {
   CREATE_LAND,
-  GET_ALL_LANDS,
   CREATE_LAND_TYPE,
-  CREATE_LAND_DESCRIPTION
+  CREATE_LAND_DESCRIPTION,
+  FETCH_ALL_LANDS
 } from "./landConstants";
 
 const initialState = {
   lands: [],
-  isLoading: false,
   landType: [
     { value: "Government Reserved" },
     { value: "School" },
@@ -24,7 +23,7 @@ const initialState = {
 };
 
 const createLand = (state, payload) => {
-  return { ...state, lands: [...state.lands, Object.assign({}, payload)] };
+  return { ...state };
 };
 
 const createLandType = (state, payload) => {
@@ -41,13 +40,14 @@ const createLandDescription = (state, payload) => {
   };
 };
 
-const getAllLand = (state, payload) => {
-  return { ...state, payload };
+// load land state
+const fetchLand = (state, payload) => {
+  return { ...state, lands: payload };
 };
 
 export default createReducer(initialState, {
   [CREATE_LAND]: createLand,
-  [GET_ALL_LANDS]: getAllLand,
+  [FETCH_ALL_LANDS]: fetchLand,
   [CREATE_LAND_TYPE]: createLandType,
   [CREATE_LAND_DESCRIPTION]: createLandDescription
 });
