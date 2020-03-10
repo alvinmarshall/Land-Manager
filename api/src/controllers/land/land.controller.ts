@@ -19,8 +19,21 @@ class LandController implements IBaseController {
       passport.authenticate("jwt", { session: false }),
       this.createLand
     );
-    this.router.get(`${this.path}`, this.index);
-    this.router.get(`${this.path}`, this.getById);
+    this.router.get(
+      `${this.path}`,
+      passport.authenticate("jwt", { session: false }),
+      this.index
+    );
+    this.router.get(
+      `${this.path}`,
+      passport.authenticate("jwt", { session: false }),
+      this.getById
+    );
+    this.router.put(
+      `${this.path}`,
+      passport.authenticate("jwt", { session: false }),
+      this.updateLand
+    );
   }
 
   private async createLand(req: Request, res: Response) {
@@ -40,7 +53,12 @@ class LandController implements IBaseController {
 
   private async index(req: Request, res: Response) {
     try {
+      const { count } = req.query;
       const data = await landService.get();
+      const total = data.length;
+      if (count) {
+        return res.send({ status: 200, data: total });
+      }
       return res.send({ status: 200, data });
     } catch (error) {
       console.error(error);
@@ -53,6 +71,17 @@ class LandController implements IBaseController {
       const { identifier } = req.query;
       const data = await landService.getOne({ id: identifier });
       return res.send({ status: 200, data });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).send(errorService.internalError());
+    }
+  }
+
+  private async updateLand(req: Request, res: Response) {
+    try {
+      const land: ILand = req.body;
+      const data = await landService.update(land);
+      return res.send({ status: 200, data, message: "land updated" });
     } catch (error) {
       console.error(error);
       return res.status(500).send(errorService.internalError());

@@ -1,6 +1,10 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 
-const LandCard = ({ data }) => {
+const LandCard = ({ data, history }) => {
+  const handleNavigation = () => {
+    history.push("/app/create-land", { currentLand: data });
+  };
   return (
     <div className="col-lg-4">
       <div className="card">
@@ -12,9 +16,13 @@ const LandCard = ({ data }) => {
               <h5 className="h3 mb-0">Land - {data.name}</h5>
             </div>
             <div className="col-4 text-right">
-              <a href="#!" className="btn btn-sm btn-neutral">
-                Action
-              </a>
+              <button
+                type="button"
+                className="btn btn-sm btn-neutral"
+                onClick={handleNavigation}
+              >
+                Detail
+              </button>
             </div>
           </div>
         </div>
@@ -37,4 +45,4 @@ const LandCard = ({ data }) => {
   );
 };
 
-export default LandCard;
+export default withRouter(LandCard);

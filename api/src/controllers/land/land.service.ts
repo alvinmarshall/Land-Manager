@@ -1,26 +1,24 @@
 import IBaseService from "../IBaseService";
-import Land from "../../model/Land";
+import LandRepository from "./land.repository";
 
 class LandService implements IBaseService {
   constructor() {}
   create(data: any) {
-    return Land.create(data);
+    return LandRepository.createLand(data);
   }
   get() {
-    return Land.find({}).exec();
+    return LandRepository.getAllLands();
   }
   getOne(identifier: any) {
-    return Land.findOne(identifier).exec();
+    return LandRepository.getLand(identifier);
   }
   edit(identifier: any) {
-    throw new Error("Method not implemented.");
   }
   update(identifier: any) {
-    throw new Error("Method not implemented.");
+    return LandRepository.updateLand(identifier);
   }
   delete(identifier: any) {
     throw new Error("Method not implemented.");
   }
 }
-const landService = new LandService();
-export default landService;
+export default new LandService();

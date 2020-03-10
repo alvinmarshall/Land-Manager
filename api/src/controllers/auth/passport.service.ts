@@ -43,10 +43,6 @@ export const passportService = () => {
         done(null, false);
       }
 
-      if (process.env.NODE_ENV === "development") {
-        console.log(payload);
-      }
-
       done(null, data);
     } catch (error) {
       return console.error(error);

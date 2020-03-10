@@ -7,20 +7,27 @@ import {
   asyncActionFinish
 } from "../../../async/asyncAction";
 import { setErrorAction } from "../../../error/errorAction";
+import { getFetchTotalLandAction } from "../../Stats/reducer/statsAction";
 
 const HTTP_OK = 200;
 const HTTP_CREATED = 201;
 
-//#region Create new land
-// Create new land
+//#region Create & Update land
+// Create new  / update land
 export const createLandAction = payload => {
   return async dispatch => {
     try {
       dispatch(asyncActionStart());
+      if (payload._id) {
+        updateLand(payload, dispatch);
+        return;
+      }
+      delete payload._id; // remove _id from payload
       const response = await axios.post("/land", payload);
       const { status } = response.data;
       if (status === HTTP_CREATED) {
         toastr.success("Created!", "Land created successful");
+        dispatch(getFetchTotalLandAction());
       }
       dispatch(asyncActionFinish());
     } catch (err) {
@@ -28,6 +35,19 @@ export const createLandAction = payload => {
       dispatch(setErrorAction(err));
     }
   };
+};
+const updateLand = async (payload, dispatch) => {
+  try {
+    const response = await axios.put("/land", payload);
+    const { status } = response.data;
+    if (status === HTTP_OK) {
+      toastr.success("Updated", "Land updated successful");
+    }
+    dispatch(asyncActionFinish());
+  } catch (err) {
+    dispatch(asyncActionError());
+    dispatch(setErrorAction(err));
+  }
 };
 //#endregion
 

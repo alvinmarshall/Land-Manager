@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import ReduxToastr from 'react-redux-toastr'
+import ReduxToastr from "react-redux-toastr";
 import Main from "../../components/Main/Main";
 import { configureStore } from "../store/configStore";
 import { setAuthUserStateAction } from "../../components/Login/reducer/authActions";
