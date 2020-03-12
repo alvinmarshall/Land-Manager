@@ -4,6 +4,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import Land from "../Land/Land";
 import Profile from "../Profile/Profile";
 import CreateLandView from "../../../view/land/CreateLandView";
+import WrapGMap from "../Map/WrapGMap";
 
 const Content = () => {
   return (
@@ -12,6 +13,7 @@ const Content = () => {
       <Route path="/app/land" component={Land} />
       <Route path="/app/create-land" component={CreateLandView} />
       <Route path="/app/profile" component={Profile} />
+      <Route path="/app/map" component={WrapGMap} />
     </div>
   );
 };

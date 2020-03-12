@@ -111,10 +111,10 @@ const SideBar = () => {
                   </div>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link " href="#navbar-components">
+                  <NavLink className="nav-link " to="/app/map">
                     <i className="ni ni-ui-04 text-info" />
                     <span className="nav-link-text">Map</span>
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#navbar-forms">

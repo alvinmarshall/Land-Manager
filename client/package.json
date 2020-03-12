@@ -12,6 +12,7 @@
     "lodash": "^4.17.15",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-google-maps": "^9.4.5",
     "react-hook-form": "^4.10.2",
     "react-redux": "^7.2.0",
     "react-redux-toastr": "^7.6.4",
