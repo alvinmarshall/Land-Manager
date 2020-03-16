@@ -4,7 +4,7 @@ export interface ILand extends Document {
   name: string;
   location: string;
   town: string;
-  coOrdinates: { lat: number; lng: number };
+  coOrdinates: [{ lat: number; lng: number }];
   type: string;
   description: string;
   status: string;
@@ -23,12 +23,7 @@ const landSchema: Schema = new Schema({
     type: String,
     required: true
   },
-  coOrdinates: {
-    lat: {
-      type: Number
-    },
-    lng: { type: Number }
-  },
+  coOrdinates: [{ lat: { type: Number }, lng: { type: Number } }],
   type: { type: String, default: "Other" },
   description: {
     type: String,
