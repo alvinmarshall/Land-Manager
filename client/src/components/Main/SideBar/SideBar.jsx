@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 const SideBar = () => {
   return (
@@ -143,13 +143,13 @@ const SideBar = () => {
                   <div className="collapse" id="navbar-forms">
                     <ul className="nav nav-sm flex-column">
                       <li className="nav-item">
-                        <a
-                          href="../../pages/forms/elements.html"
+                        <Link
+                          to="/app/land_form"
                           className="nav-link"
                         >
                           <span className="sidenav-mini-icon"> E </span>
                           <span className="sidenav-normal"> Elements </span>
-                        </a>
+                        </Link>
                       </li>
                       <li className="nav-item">
                         <a
