@@ -12,7 +12,8 @@ const CreateLandForm = ({
   location
 }) => {
   const inputFocus = useRef(null);
-  const { handleSubmit, register, errors } = useForm();
+  const [cooridnates, setCoOridates] = useState([]);
+  const { handleSubmit, register, errors, getValues, setValue } = useForm();
   const { state } = location;
 
   const [field, setField] = useState({
@@ -30,7 +31,7 @@ const CreateLandForm = ({
   });
 
   const handleOnSubmitForm = (payload, e) => {
-    payload.coOrdinates = { lat: payload.lat, lng: payload.lng };
+    payload.coOrdinates = cooridnates
     onCreateLand(payload);
 
     if (!payload._id) {
@@ -48,6 +49,17 @@ const CreateLandForm = ({
       setField(currentLand);
     }
   }, [state]);
+
+  const handleMoreCordinates = evt => {
+    const { lat, lng } = getValues();
+    if (!(lat.trim() && lng.trim())) {
+      window.alert("Invalid coordinates");
+      return;
+    }
+
+    setCoOridates([...cooridnates, { lat, lng }]);
+    setValue([{ lat: "" }, { lng: "" }]);
+  };
 
   return (
     <div>
@@ -129,9 +141,7 @@ const CreateLandForm = ({
                   className="form-control"
                   placeholder="latitude"
                   name="lat"
-                  ref={register({
-                    required: "Latitude value required"
-                  })}
+                  ref={register()}
                   defaultValue={field.coOrdinates.lat}
                 />
                 <div className="text-danger">
@@ -145,14 +155,23 @@ const CreateLandForm = ({
                   className="form-control"
                   placeholder="longitude"
                   name="lng"
-                  ref={register({
-                    required: "longitude value required"
-                  })}
+                  ref={register()}
                   defaultValue={field.coOrdinates.lng}
                 />
                 <div className="text-danger">
                   {errors.lng && errors.lng.message}
                 </div>
+              </div>
+
+              <div className="col-sm-2">
+                <button
+                  type="button"
+                  className="btn btn-sm btn-primary mt-2"
+                  onClick={handleMoreCordinates}
+                >
+                  Add {` ${cooridnates.length}`}{" "}
+                  <i className="ni ni-fat-add"></i>
+                </button>
               </div>
             </div>
 
