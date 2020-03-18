@@ -1,16 +1,18 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import InLineTextField from "../../forms/InLineForms/InLineTextField";
 import InLineSelectFieldButton from "../../forms/InLineForms/InLineSelectFieldButton";
+import { LAND_USE_MODAL } from "./reducer/landConstants";
 
-const LeaseForm = () => {
+const LeaseForm = ({ onCreaseLease, openModal, landUseOptions }) => {
   const { register, errors, handleSubmit } = useForm();
 
   const handleFormSubmit = payload => {
     if (payload._id.trim().length === 0) {
       window.alert("create basic info before adding this entry");
     }
-    console.log("payload", payload);
+    onCreaseLease(payload);
   };
 
   return (
@@ -52,6 +54,8 @@ const LeaseForm = () => {
         label="Use of land"
         name="land_use"
         register={register}
+        options={landUseOptions}
+        buttonCallback={() => openModal(LAND_USE_MODAL)}
       />
       <InLineTextField
         label="Amount Paid"
@@ -81,4 +85,9 @@ const LeaseForm = () => {
   );
 };
 
+LeaseForm.propTypes = {
+  onCreaseLease: PropTypes.func,
+  openModal: PropTypes.func,
+  landUseOptions: PropTypes.array
+};
 export default LeaseForm;

@@ -7,7 +7,7 @@ export interface ILand extends Document {
   coOrdinates: [{ lat: number; lng: number }];
   type: string;
   description: string;
-  status: string;
+  status: number;
 }
 
 const landSchema: Schema = new Schema({
@@ -24,14 +24,14 @@ const landSchema: Schema = new Schema({
     required: true
   },
   coOrdinates: [{ lat: { type: Number }, lng: { type: Number } }],
-  type: { type: String, default: "Other" },
+  type: { type: Schema.Types.ObjectId, ref: "LandType" },
   description: {
-    type: String,
-    default: "Other"
+    type: Schema.Types.ObjectId,
+    ref: "LandDescription"
   },
   status: {
-    type: String,
-    default: "Not Allocated"
+    type: Number,
+    default: 0
   }
 });
 

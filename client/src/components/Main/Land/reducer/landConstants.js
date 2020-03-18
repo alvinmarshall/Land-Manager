@@ -7,3 +7,7 @@ export const LAND_IS_LOADING = "LAND_IS_LOADING";
 export const FETCH_LAND_TYPE = "FETCH_LAND_TYPE";
 export const FETCH_LAND_STATUS = "FETCH_LAND_STATUS";
 export const FETCH_LAND_DESCRIPTION = "FETCH_LAND_DESCRIPTION";
+export const LAND_DESCRIPTION_MODAL = "LandDescriptionModal";
+export const LAND_USE_MODAL = "LandUseModal";
+export const CREATE_LAND_USE = "CREATE_LAND_USE";
+export const FETCH_LAND_USE = "FETCH_LAND_USE";

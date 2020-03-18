@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 
 const LandCard = ({ data, history }) => {
+  const { name, location, type, town } = data;
   const handleCreateLandNavigation = () => {
     history.push("/app/create-land", { currentLand: data });
   };
@@ -17,7 +18,7 @@ const LandCard = ({ data, history }) => {
           <div className="row align-items-center">
             <div className="col-8">
               {/* Title */}
-              <h5 className="h3 mb-0">Land - {data.name}</h5>
+              <h5 className="h3 mb-0">Land - {name}</h5>
             </div>
             <div className="col-4 text-right">
               <button
@@ -35,9 +36,9 @@ const LandCard = ({ data, history }) => {
         {/* Card body */}
         <div className="card-body">
           <ul className="list-group list-group-flush">
-            <li className="list-group-item">Location: {data.location}</li>
-            <li className="list-group-item">Type: {data.type}</li>
-            <li className="list-group-item">Town: {data.town}</li>
+            <li className="list-group-item">Location: {location}</li>
+            <li className="list-group-item">Type: {type.type}</li>
+            <li className="list-group-item">Town: {town}</li>
           </ul>
 
           <button className="btn btn-primary" onClick={handlePlotMapNavigate}>

@@ -23,9 +23,9 @@ const InLineSelectFieldButton = ({
 
       <div className={`col-sm-${inputColSize}`}>
         <select name={name} className="form-control" ref={register(required)}>
-          {options.map((opt, index) => (
-            <option key={index} value={opt.value}>
-              {opt.value}
+          {options.map(opt => (
+            <option key={opt._id} value={opt._id}>
+              {opt[name]}
             </option>
           ))}
         </select>

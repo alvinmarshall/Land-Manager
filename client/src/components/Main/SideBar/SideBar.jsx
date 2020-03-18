@@ -144,7 +144,7 @@ const SideBar = () => {
                     <ul className="nav nav-sm flex-column">
                       <li className="nav-item">
                         <Link
-                          to="/app/land_form"
+                          to="/app"
                           className="nav-link"
                         >
                           <span className="sidenav-mini-icon"> E </span>

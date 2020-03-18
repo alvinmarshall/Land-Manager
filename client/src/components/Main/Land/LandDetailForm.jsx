@@ -1,7 +1,7 @@
 import React from "react";
-import LandBasicForm from "./LandBasicForm";
-import LeaseForm from "./LeaseForm";
 import LandFilesForm from "./LandFilesForm";
+import LandBasicView from "../../../view/land/LandBasicView";
+import LandLeaseView from "../../../view/land/LandLeaseView";
 
 const LandDetailForm = () => {
   return (
@@ -54,7 +54,7 @@ const LandDetailForm = () => {
                 <div className="card">
                   <div className="card-body">
                     {/* Basic info */}
-                    <LandBasicForm />
+                    <LandBasicView />
                   </div>
                 </div>
               </div>
@@ -69,7 +69,7 @@ const LandDetailForm = () => {
                 <div className="card">
                   <div className="card-body">
                     {/* Lease info */}
-                    <LeaseForm />
+                    <LandLeaseView />
                   </div>
                 </div>
               </div>

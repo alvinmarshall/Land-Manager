@@ -1,18 +1,18 @@
 import React from "react";
-import { useDispatch } from "react-redux"
+import { useDispatch } from "react-redux";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-import useModalToggle from "../../../hooks/useModalToggle";
 import SingleInputForm from "../../forms/SingleInputForm";
-import { createLandTypeAction } from "../../Main/Land/reducer/landAction";
+import useModalToggle from "../../../hooks/useModalToggle";
+import { createLandDescriptionAction } from "../../Main/Land/reducer/landAction";
 
-const LandTypeModal = () => {
-  const dispatch = useDispatch()
+const LandDescriptionModal = () => {
+  const dispatch = useDispatch();
   const [modal, toggle] = useModalToggle();
+
   const handleFormSubmit = payload => {
     console.log("payload", payload);
-    dispatch(createLandTypeAction(payload))
+    dispatch(createLandDescriptionAction(payload));
   };
-
 
   return (
     <Modal
@@ -22,12 +22,13 @@ const LandTypeModal = () => {
       keyboard={false}
       backdrop={"static"}
     >
-      <ModalHeader toggle={toggle}>Land Type</ModalHeader>
+      <ModalHeader toggle={toggle}>Land Description</ModalHeader>
       <ModalBody>
         <SingleInputForm
-          label="Type Name"
-          name="type"
-          required={{ required: "type is required" }}
+          type="text"
+          label="Description Name"
+          name="description"
+          required={{ required: "description is required" }}
           toggle={toggle}
           onFormSubmit={handleFormSubmit}
         />
@@ -36,4 +37,4 @@ const LandTypeModal = () => {
   );
 };
 
-export default React.memo(LandTypeModal);
+export default React.memo(LandDescriptionModal);
